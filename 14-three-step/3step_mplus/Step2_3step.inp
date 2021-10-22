@@ -1,0 +1,47 @@
+TITLE:
+Step2_3step_automation LSAY
+DATA:
+FILE = "/Users/agarber/github/Quant-Fish-END/14-three-step/3step_mplus/Step2_3step.dat";
+ 
+VARIABLE:
+NAMES = ENJOY GOOD UNDRSTND NERVOUS SCARED USEFUL LOGICAL JOB ADULT MATH_IRT FEMALE
+     CPROB1 CPROB2 CPROB3 CPROB4 CPROB5 N; 
+ MISSING=.;
+ nominal=N;
+  USEVAR = N;
+  missing are all (999); 
+  classes = c(5); 
+ANALYSIS:
+estimator = mlr; 
+  type = mixture; 
+  starts = 0;
+MODEL:
+%C#1%
+[n#1@2.693];
+[n#2@-0.328];
+[n#3@-0.504];
+[n#4@-0.316];
+
+%C#2%
+[n#1@-0.748];
+[n#2@3.095];
+[n#3@-8.98];
+[n#4@-1.265];
+
+%C#3%
+[n#1@-0.265];
+[n#2@-6.861];
+[n#3@2.548];
+[n#4@-4.052];
+
+%C#4%
+[n#1@-0.144];
+[n#2@1.356];
+[n#3@-4.438];
+[n#4@2.688];
+
+%C#5%
+[n#1@-2.782];
+[n#2@-1.878];
+[n#3@-3.031];
+[n#4@-3.014]; 

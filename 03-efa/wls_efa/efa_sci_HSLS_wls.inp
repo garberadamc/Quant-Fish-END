@@ -1,0 +1,20 @@
+TITLE:
+EFA with Categorical Indicators - HSLS
+DATA:
+FILE = "/Users/agarber/github/Quant-Fish-END/03-efa/wls_efa/efa_sci_HSLS_wls.dat";
+ 
+VARIABLE:
+NAMES = mth_pers mth_othr mth_life mth_cllg mth_futr mth_tsts mth_text mth_mstr
+     mth_asgn mth_enjy sci_pers sci_othr sci_life sci_cllg sci_futr sci_tsts
+     sci_text sci_mstr sci_asgn sci_enjy; 
+ MISSING=.;
+ usevar = mth_pers-sci_enjy;
+ 
+     categorical = mth_pers-sci_enjy;
+ANALYSIS:
+type = efa 1 7;
+     estimator=wlsmv;
+OUTPUT:
+sampstat;
+PLOT:
+type = plot3;

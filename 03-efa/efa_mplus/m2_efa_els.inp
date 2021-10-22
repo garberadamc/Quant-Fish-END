@@ -1,0 +1,22 @@
+TITLE:
+EFA
+DATA:
+FILE = "/Users/agarber/github/Quant-Fish-END/03-efa/efa_mplus/m2_efa_els.dat";
+ 
+VARIABLE:
+NAMES = stu_tch sc_spirt tch_good tch_intr tch_prai stu_dwn not_safe disr_lrn gangs
+     rac_fght sch_rule pun_same strict pun_rule female stu_race eng_natv; 
+ MISSING=.;
+ usevar =
+  stu_tch sc_spirt tch_good tch_intr
+  tch_prai stu_dwn not_safe disr_lrn 
+  gangs rac_fght sch_rule pun_same strict pun_rule;
+ANALYSIS:
+type = efa 1 5;   
+  estimator = MLR; 
+  rotation = varimax;  !!! orthogonal (no factor correlations) !!!
+  
+OUTPUT:
+sampstat;
+PLOT:
+type = plot3;

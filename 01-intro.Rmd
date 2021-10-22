@@ -1,0 +1,192 @@
+---
+title: "Introduction to `MplusAutomation`"
+author: "*Adam Garber*"
+subtitle: ''
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE, message = FALSE, warning = FALSE)
+
+```
+
+# --------------------------------------------------------------------------------------
+
+## About me:
+
+- I am a doctoral student in the department of Education studying quantitative methods at the University of California, Santa Barbara 
+- I study the development and communication of mixture modeling methods in-line with my advisor Dr. Karen Nylund-Gibson's research.
+- The materials used in this course have been adapted from content I developed as a teaching assistant for courses in `Factor Analysis`, `Structural Equation Modeling`, & `Applied Mixture Modeling` taught by Professor Nylund-Gibson. 
+
+# --------------------------------------------------------------------------------------
+
+## **WHAT** is `MplusAutomation` & **WHY** schould we use it?
+
+**WHAT?**
+
+- `MplusAutomation` is an `R` package
+- It “wraps around” the `Mplus` program
+- Requires both `R` & `Mplus` software 
+- Requires learning some basics of 2 programming languages
+- Car metaphor: R/Rstudio is the *steering wheel or dashboard* & Mplus is the *engine*
+
+**WHY?**
+
+- As a data analyst using Mplus to analyze projects that often span multiple years I realized a need for clearly organized work procedures in which every research decision can be documented in a single place. 
+- The motivation for using this method is to increase reproducibility, organization, efficiency, and transparency
+
+**HOW?**
+
+- We will interface entirely within R-Studio.
+- The code presented will be very repetitive by design. Creating a consistent routine is key!
+
+# --------------------------------------------------------------------------------------
+
+## Citing `R`, `Mplus`, & `MplusAutomation` 
+
+- It is important to recognize & acknowledge the large contribution provided by these great resources. 
+- This course is made possible by the availability of the following software:
+
+R Core Team (2017). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL http://www.R-project.org/
+
+Muthén, L.K. & Muthén, B.O. (1998-2017). Mplus User’s Guide. Eighth Edition. Los Angeles, CA: Muthén & Muthén
+
+Hallquist, M. N., & Wiley, J. F. (2018). MplusAutomation: An R Package for Facilitating Large-Scale Latent Variable Analyses in Mplus. Structural equation modeling: a multidisciplinary journal, 25(4), 621-638.
+
+# --------------------------------------------------------------------------------------
+
+## Goals (estabishing a `routine`):
+
+- The goal of this method is to have a self-contained project in a single location containing all relevant code for analysis and presentation of results.
+- In the design of this course I considered the following 3 principles:
+
+1. Accessibility
+2. Communication
+3. Organization 
+
+
+# --------------------------------------------------------------------------------------
+
+## Participation
+
+- To get the most out of the course **I highly recommend** following along during the recordings and writing/running the code yourself. Feel free to pause the recording to catch up or review any of the steps. 
+- There is no substitute for practice. Learning `MplusAutomation` requires trial and error to memorize the routine (i.e., lots of repetition). 
+
+All R scripts & materials can be downloaded at the Github repository found here: 
+
+> [$\color{blue}{\text{https://github.com/garberadamc/Quant-Fish-START}}$](github.com/garberadamc/Quant-Fish-START)
+
+To download the complete repository containing all Mplus input & output files see the following repository: 
+
+> [$\color{blue}{\text{https://github.com/garberadamc/Quant-Fish-END}}$](github.com/garberadamc/Quant-Fish-END)
+
+# --------------------------------------------------------------------------------------
+
+## Scope of Course
+
+- It is assumed that participants taking this course have previous experience with `R` & `Mplus`.
+- The course will focus on procedures to implement a range of Structural Equation Modeling (SEM) analyses using `MplusAutomation`. 
+- The conceptual or technical details of these models are beyond the scope of this course. 
+- I will rely on tools such as `Rmarkdown` & `Github` for teaching purposes but no experience with these tools is necessary to follow or implement the analyses.  
+
+# --------------------------------------------------------------------------------------
+
+## Preparing to work with MplusAutomation - Tools for Reproducibility
+
+*A Tidy Approach to MplusAutomation*
+
+```{r, eval=TRUE, echo=FALSE}
+
+library(tidyverse);library(gt)
+
+tools <- tribble(
+  ~"Tool/Package", ~"Purpose/Utility",  ~"Advantages",
+ #---------------|-------------------|----------------|,
+ "Mplus software" ,  "Comprehensive SEM modeling support" , "High modeling flexibility",
+ "{MplusAutomation}",  "Conduit between R & Mplus" , "Organization & documentation",
+ "R Project" ,  "Project containment" , "Ease of sharing or portability",
+ "{here} package" , "Unbreakable/consistent file paths across OS" , "Reproducibility (for Science's sake!)",
+ "{tidyverse} package" ,  "Intuitive/descriptive function names" , "Accessibility to new users & translation",
+ "{haven} package" ,  "View-able metadata in R from SPSS data-files" , "Getting to know your measures",
+ "{ggplot2} package" ,  "Clear, customizable, reproducible figures" , "Publication quality data visualizations",
+ "pipe operator (%>%)", "Readable sequences of functions", "first() %>% and_then() %>% and_finally()",
+ "Rmarkdown", "Integrating R code, text, output, and Latex", "Communication & presentation",
+ "Github", "Version control & sharing repositories ", "Collaboration & accessability",
+ "Project sub-folders", "Sorting large quantities of files", "Order, tidiness, & efficiency"
+)
+
+tools %>%
+ gt() %>%
+ tab_header(title = md("**Tools for Reproducibility - A Tidy Approach to MplusAutomation**"),
+            subtitle = md("&nbsp;")) %>%
+ tab_options(column_labels.font.weight = "bold") %>%
+ tab_style(style = "padding-top:12px;padding-bottom:12px;",
+           locations = list(cells_body(), cells_column_labels(), cells_title()))
+  
+```
+
+
+```{r, echo=FALSE, eval=TRUE, out.width = "100%", out.height= "100%", fig.pos="h"}
+library(here)
+knitr::include_graphics(here("01-intro", "mplus-auto-map.png"))
+```
+
+# --------------------------------------------------------------------------------------
+
+## A note about choosing the location of your project folder
+
+- A good location is on the **desktop** or within a **single folder**. 
+- Due to the fact that Mplus only reads the first 90 columns in each line an error will occur if the file-path is longer than this limit when using MplusAutomation to run models. 
+
+`e.g., if/your/filepath/has/many/nested/folders/it/will/be/longer/than/the/90character//limit/data.dat`
+
+# --------------------------------------------------------------------------------------
+
+## A note on coding style:
+
+- Naming conventions: **Be consistent!** 
+- I use the naming convention called *lower snake case* (e.g., `this_is_lower_snake_case`)
+- Annotate code generously
+- Let your code breath: use **return** often to spread code chunks out vertically 
+
+# --------------------------------------------------------------------------------------
+
+## Resources: 
+
+`Rproject` | `Rmarkdown` | `Git-Github`
+
+- [$\color{blue}{\text{R-studio and R-Projects Tutorials}}$](https://rstudio-conf-2020.github.io/r-for-excel/rstudio.html)
+- [$\color{blue}{\text{Rmarkdown Basics Tutorial}}$](https://rmarkdown.rstudio.com/lesson-1.html)
+- [$\color{blue}{\text{Connect Git-Hithub with R-studio and Download Repositories}}$](https://docs.google.com/document/d/1zx2upJJqFZe94O3BQSMI56Z76s3haLXC0otKSpcZaJQ/edit)
+
+`MplusAutomation`
+
+- [$\color{blue}{\text{Published Documentation - Hallquist and Wiley, 2018}}$](https://www.tandfonline.com/doi/pdf/10.1080/10705511.2017.1402334?needAccess=true)
+- [$\color{blue}{\text{Vignette Examples - Hallquist}}$](https://cran.r-project.org/web/packages/MplusAutomation/vignettes/Vignette.pdf)
+
+# --------------------------------------------------------------------------------------
+
+References
+
+Hallquist, M. N., & Wiley, J. F. (2018). MplusAutomation: An R Package for Facilitating Large-Scale Latent Variable Analyses in Mplus. Structural equation modeling: a multidisciplinary journal, 25(4), 621-638.
+
+Muthén, L.K. and Muthén, B.O. (1998-2017).  Mplus User’s Guide.  Eighth Edition. Los Angeles, CA: Muthén & Muthén
+
+R Core Team (2017). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL http://www.R-project.org/
+
+Wickham et al., (2019). Welcome to the tidyverse. Journal of Open Source Software, 4(43), 1686, https://doi.org/10.21105/joss.01686
+
+# --------------------------------------------------------------------------------------
+
+## Further resources & examples here:
+  
+$\color{blue}{\text{https://garberadamc.github.io/project-site/}}$
+
+$\color{blue}{\text{https://www.adam-garber.com/}}$
+  
+# --------------------------------------------------------------------------------------

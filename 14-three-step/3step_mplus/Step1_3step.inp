@@ -1,0 +1,30 @@
+TITLE:
+Step1_3step_automation - LSAY
+DATA:
+FILE = "/Users/agarber/github/Quant-Fish-END/14-three-step/3step_mplus/Step1_3step.dat";
+ 
+VARIABLE:
+NAMES = rand LSAYID REGION URBAN gender MOTHED FATHED RACETH math_irt enjoy good
+     undrstnd nervous scared useful logical job adult female; 
+ MISSING=.;
+ categorical = enjoy-adult; 
+   
+    usevar = enjoy-adult;
+    
+    classes = c(5); 
+    
+    !!! NOTE: All auxiliary variables to be considered in the final model should be listed here !!!
+    
+    auxiliary = math_irt female;
+ANALYSIS:
+estimator = mlr; 
+    type = mixture; 
+    starts = 500 100;
+SAVEDATA:
+!!! NOTE: This saved dataset will contain class probabilities and modal assignment columns !!!
+    File=3step_savedata_092021.dat;
+    Save=cprob;
+    Missflag= 999;
+PLOT:
+type = plot3; 
+    series = enjoy-adult(*);

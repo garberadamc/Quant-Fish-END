@@ -1,0 +1,107 @@
+TITLE:
+Step3_3step_automation LSAY
+DATA:
+FILE = "/Users/agarber/github/Quant-Fish-END/14-three-step/3step_mplus/Step3_3step.dat";
+ 
+VARIABLE:
+NAMES = ENJOY GOOD UNDRSTND NERVOUS SCARED USEFUL LOGICAL JOB ADULT MATH_IRT FEMALE
+     CPROB1 CPROB2 CPROB3 CPROB4 CPROB5 N; 
+ MISSING=.;
+ nominal = n;
+  usevar = n math_irt female;
+  missing are all (999); 
+  classes = c(5); 
+DEFINE:
+center female (grandmean);
+ANALYSIS:
+estimator = mlr; 
+  type = mixture; 
+  starts = 0;
+MODEL:
+!!! DISTAL = math_irt  !!!
+!!! COVARIATE = female !!!
+
+%OVERALL%
+
+c on female;
+math_irt on female;
+math_irt;
+
+%C#1%
+[n#1@2.693];
+[n#2@-0.328];
+[n#3@-0.504];
+[n#4@-0.316];
+
+[math_irt] (m1);
+math_irt;
+math_irt on female (s1);
+
+%C#2%
+[n#1@-0.748];
+[n#2@3.095];
+[n#3@-8.98];
+[n#4@-1.265];
+
+[math_irt] (m2);
+math_irt;
+math_irt on female (s2);
+
+%C#3%
+[n#1@-0.265];
+[n#2@-6.861];
+[n#3@2.548];
+[n#4@-4.052];
+
+[math_irt] (m3);
+math_irt;
+math_irt on female (s3);
+ 
+%C#4%
+[n#1@-0.144];
+[n#2@1.356];
+[n#3@-4.438];
+[n#4@2.688];
+
+[math_irt] (m4);
+math_irt;
+math_irt on female (s4);
+
+%C#5%
+[n#1@-2.782];
+[n#2@-1.878];
+[n#3@-3.031];
+[n#4@-3.014]; 
+
+[math_irt] (m5);
+math_irt;
+math_irt on female (s5); 
+MODEL CONSTRAINT:
+New (diff12 diff13 diff14 diff15
+       diff23 diff24 diff25
+       diff34 diff35 diff45  
+       slope12 slope13 slope14 slope15
+       slope23 slope24 slope25
+       slope34 slope35 slope45);
+
+  diff12 = m1-m2;   diff24 = m2-m4;     
+  diff13 = m1-m3;   diff25 = m2-m5;
+  diff14 = m1-m4;   diff34 = m3-m4;
+  diff15 = m1-m5;   diff35 = m3-m5;
+  diff23 = m2-m3;   diff45 = m4-m5;
+  
+  slope12 = s1-s2;   slope24 = s2-s4;     
+  slope13 = s1-s3;   slope25 = s2-s5;
+  slope14 = s1-s4;   slope34 = s3-s4;
+  slope15 = s1-s5;   slope35 = s3-s5;
+  slope23 = s2-s3;   slope45 = s4-s5;
+MODEL TEST:
+m1=m2;       !!! Distal outcome omnibus Wald test for `math_irt` !!!
+  m2=m3;
+  m3=m4;
+  m4=m5;
+
+  !s1=s2;      !!! Slope difference omnibus Wald test `math_irt on female` !!!
+  !s2=s3;  
+  !s3=s4;
+  !s4=s5; 

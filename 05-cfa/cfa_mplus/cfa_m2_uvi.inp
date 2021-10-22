@@ -1,0 +1,19 @@
+TITLE:
+CFA - ULI
+DATA:
+FILE = "/Users/agarber/github/Quant-Fish-END/05-cfa/cfa_mplus/cfa_data.dat";
+ 
+VARIABLE:
+NAMES = stolen t_hurt p_fight hit damaged bullied safe disrupt gangs rac_fght; 
+ MISSING=.;
+ usevar = stolen-rac_fght;
+ANALYSIS:
+estimator = mlr;
+MODEL:
+factor1 by stolen t_hurt p_fight hit damaged bullied;
+  
+     factor2 by safe disrupt gangs rac_fght;
+OUTPUT:
+sampstat standardized residual modindices (3.84);
+PLOT:
+type = plot3;

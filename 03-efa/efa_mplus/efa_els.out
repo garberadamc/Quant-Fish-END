@@ -1,0 +1,1455 @@
+Mplus VERSION 8.6 (Mac)
+MUTHEN & MUTHEN
+10/22/2021  11:07 AM
+
+INPUT INSTRUCTIONS
+
+  TITLE:
+  EFA
+  DATA:
+  FILE = "/Users/agarber/github/Quant-Fish-END/03-efa/efa_mplus/efa_els.dat";
+
+  VARIABLE:
+  NAMES = stu_tch sc_spirt tch_good tch_intr tch_prai stu_dwn not_safe disr_lrn gangs
+       rac_fght sch_rule pun_same strict pun_rule female stu_race eng_natv;
+   MISSING=.;
+   usevar =
+    stu_tch sc_spirt tch_good tch_intr
+    tch_prai stu_dwn not_safe disr_lrn
+    gangs rac_fght sch_rule pun_same strict pun_rule;
+  ANALYSIS:
+  type = efa 1 5;   ! run efa of 1 through 5 factor models
+    estimator = MLR;  ! using the ROBUST ML Estimator
+    parallel=50;      ! run the parallel analysis for viewing elbow plot
+
+  OUTPUT:
+  sampstat;
+  PLOT:
+  type = plot3;
+
+
+
+*** WARNING
+  Data set contains cases with missing on all variables.
+  These cases were not included in the analysis.
+  Number of cases with missing on all variables:  74
+   1 WARNING(S) FOUND IN THE INPUT INSTRUCTIONS
+
+
+
+
+EFA
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                         720
+
+Number of dependent variables                                   14
+Number of independent variables                                  0
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Continuous
+   STU_TCH     SC_SPIRT    TCH_GOOD    TCH_INTR    TCH_PRAI    STU_DWN
+   NOT_SAFE    DISR_LRN    GANGS       RAC_FGHT    SCH_RULE    PUN_SAME
+   STRICT      PUN_RULE
+
+
+Estimator                                                      MLR
+Rotation                                                    GEOMIN
+Row standardization                                    CORRELATION
+Type of rotation                                           OBLIQUE
+Epsilon value                                               Varies
+Information matrix                                        OBSERVED
+Maximum number of iterations                                  1000
+Convergence criterion                                    0.500D-04
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization Specifications for the Exploratory Factor Analysis
+Rotation Algorithm
+  Number of random starts                                       30
+  Maximum number of iterations                               10000
+  Derivative convergence criterion                       0.100D-04
+
+Input data file(s)
+  /Users/agarber/github/Quant-Fish-END/03-efa/efa_mplus/efa_els.dat
+
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns            29
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT
+
+
+           Covariance Coverage
+              STU_TCH       SC_SPIRT      TCH_GOOD      TCH_INTR      TCH_PRAI
+              ________      ________      ________      ________      ________
+ STU_TCH        0.997
+ SC_SPIRT       0.993         0.996
+ TCH_GOOD       0.982         0.981         0.985
+ TCH_INTR       0.983         0.982         0.972         0.986
+ TCH_PRAI       0.985         0.983         0.976         0.975         0.988
+ STU_DWN        0.983         0.982         0.971         0.974         0.975
+ NOT_SAFE       0.985         0.985         0.974         0.975         0.978
+ DISR_LRN       0.989         0.986         0.975         0.976         0.981
+ GANGS          0.976         0.976         0.965         0.968         0.968
+ RAC_FGHT       0.992         0.990         0.981         0.982         0.986
+ SCH_RULE       0.993         0.993         0.981         0.982         0.983
+ PUN_SAME       0.990         0.989         0.979         0.981         0.982
+ STRICT         0.989         0.988         0.976         0.979         0.979
+ PUN_RULE       0.990         0.989         0.978         0.979         0.981
+
+
+           Covariance Coverage
+              STU_DWN       NOT_SAFE      DISR_LRN      GANGS         RAC_FGHT
+              ________      ________      ________      ________      ________
+ STU_DWN        0.985
+ NOT_SAFE       0.978         0.988
+ DISR_LRN       0.979         0.981         0.990
+ GANGS          0.969         0.971         0.972         0.979
+ RAC_FGHT       0.983         0.986         0.989         0.976         0.994
+ SCH_RULE       0.982         0.985         0.986         0.976         0.990
+ PUN_SAME       0.981         0.982         0.983         0.972         0.989
+ STRICT         0.978         0.979         0.983         0.971         0.986
+ PUN_RULE       0.979         0.981         0.985         0.974         0.988
+
+
+           Covariance Coverage
+              SCH_RULE      PUN_SAME      STRICT        PUN_RULE
+              ________      ________      ________      ________
+ SCH_RULE       0.996
+ PUN_SAME       0.990         0.993
+ STRICT         0.989         0.988         0.992
+ PUN_RULE       0.992         0.988         0.989         0.993
+
+
+SAMPLE STATISTICS
+
+
+     ESTIMATED SAMPLE STATISTICS
+
+
+           Means
+              STU_TCH       SC_SPIRT      TCH_GOOD      TCH_INTR      TCH_PRAI
+              ________      ________      ________      ________      ________
+                2.820         2.821         2.942         2.861         2.747
+
+
+           Means
+              STU_DWN       NOT_SAFE      DISR_LRN      GANGS         RAC_FGHT
+              ________      ________      ________      ________      ________
+                3.084         3.277         2.561         2.996         3.044
+
+
+           Means
+              SCH_RULE      PUN_SAME      STRICT        PUN_RULE
+              ________      ________      ________      ________
+                2.992         2.629         2.742         2.771
+
+
+           Covariances
+              STU_TCH       SC_SPIRT      TCH_GOOD      TCH_INTR      TCH_PRAI
+              ________      ________      ________      ________      ________
+ STU_TCH        0.345
+ SC_SPIRT       0.104         0.588
+ TCH_GOOD       0.143         0.144         0.421
+ TCH_INTR       0.154         0.178         0.261         0.498
+ TCH_PRAI       0.099         0.158         0.216         0.261         0.575
+ STU_DWN        0.023         0.060         0.040         0.055         0.063
+ NOT_SAFE       0.101         0.104         0.123         0.117         0.107
+ DISR_LRN       0.040         0.064         0.051         0.060         0.062
+ GANGS          0.095         0.088         0.099         0.111         0.073
+ RAC_FGHT       0.073         0.068         0.047         0.086         0.034
+ SCH_RULE       0.069         0.092         0.098         0.115         0.100
+ PUN_SAME       0.088         0.189         0.174         0.203         0.205
+ STRICT         0.051         0.104         0.107         0.132         0.122
+ PUN_RULE       0.025         0.082         0.094         0.113         0.134
+
+
+           Covariances
+              STU_DWN       NOT_SAFE      DISR_LRN      GANGS         RAC_FGHT
+              ________      ________      ________      ________      ________
+ STU_DWN        0.484
+ NOT_SAFE       0.140         0.512
+ DISR_LRN       0.151         0.188         0.740
+ GANGS          0.045         0.208         0.162         0.757
+ RAC_FGHT       0.087         0.195         0.140         0.329         0.689
+ SCH_RULE       0.028         0.067         0.055         0.095         0.064
+ PUN_SAME       0.097         0.107         0.088         0.058         0.078
+ STRICT         0.035         0.062         0.021         0.046         0.038
+ PUN_RULE       0.052         0.033         0.042         0.030        -0.001
+
+
+           Covariances
+              SCH_RULE      PUN_SAME      STRICT        PUN_RULE
+              ________      ________      ________      ________
+ SCH_RULE       0.413
+ PUN_SAME       0.180         0.840
+ STRICT         0.105         0.190         0.494
+ PUN_RULE       0.176         0.244         0.162         0.490
+
+
+           Correlations
+              STU_TCH       SC_SPIRT      TCH_GOOD      TCH_INTR      TCH_PRAI
+              ________      ________      ________      ________      ________
+ STU_TCH        1.000
+ SC_SPIRT       0.231         1.000
+ TCH_GOOD       0.375         0.290         1.000
+ TCH_INTR       0.370         0.329         0.571         1.000
+ TCH_PRAI       0.222         0.272         0.439         0.488         1.000
+ STU_DWN        0.056         0.112         0.089         0.112         0.119
+ NOT_SAFE       0.240         0.189         0.264         0.231         0.197
+ DISR_LRN       0.079         0.097         0.091         0.098         0.095
+ GANGS          0.186         0.132         0.175         0.180         0.111
+ RAC_FGHT       0.149         0.107         0.087         0.147         0.055
+ SCH_RULE       0.184         0.187         0.236         0.253         0.204
+ PUN_SAME       0.163         0.269         0.293         0.315         0.295
+ STRICT         0.123         0.192         0.235         0.267         0.230
+ PUN_RULE       0.062         0.153         0.208         0.230         0.253
+
+
+           Correlations
+              STU_DWN       NOT_SAFE      DISR_LRN      GANGS         RAC_FGHT
+              ________      ________      ________      ________      ________
+ STU_DWN        1.000
+ NOT_SAFE       0.282         1.000
+ DISR_LRN       0.253         0.306         1.000
+ GANGS          0.074         0.335         0.216         1.000
+ RAC_FGHT       0.150         0.328         0.195         0.455         1.000
+ SCH_RULE       0.064         0.146         0.100         0.170         0.119
+ PUN_SAME       0.153         0.162         0.112         0.072         0.103
+ STRICT         0.071         0.124         0.036         0.075         0.066
+ PUN_RULE       0.106         0.067         0.070         0.050        -0.001
+
+
+           Correlations
+              SCH_RULE      PUN_SAME      STRICT        PUN_RULE
+              ________      ________      ________      ________
+ SCH_RULE       1.000
+ PUN_SAME       0.306         1.000
+ STRICT         0.233         0.295         1.000
+ PUN_RULE       0.391         0.380         0.330         1.000
+
+
+     MAXIMUM LOG-LIKELIHOOD VALUE FOR THE UNRESTRICTED (H1) MODEL IS -10161.539
+
+
+UNIVARIATE SAMPLE STATISTICS
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     STU_TCH               2.820      -0.970       1.000    3.48%       2.000      3.000      3.000
+             718.000       0.345       1.919       4.000    6.41%       3.000      3.000
+     SC_SPIRT              2.820      -0.350       1.000    5.02%       2.000      3.000      3.000
+             717.000       0.588      -0.127       4.000   17.02%       3.000      3.000
+     TCH_GOOD              2.939      -0.694       1.000    3.39%       3.000      3.000      3.000
+             709.000       0.418       1.424       4.000   14.67%       3.000      3.000
+     TCH_INTR              2.866      -0.435       1.000    3.66%       2.000      3.000      3.000
+             710.000       0.496       0.325       4.000   15.35%       3.000      3.000
+     TCH_PRAI              2.748      -0.225       1.000    4.92%       2.000      3.000      3.000
+             711.000       0.574      -0.244       4.000   14.35%       3.000      3.000
+     STU_DWN               3.085      -0.593       1.000    2.68%       3.000      3.000      3.000
+             709.000       0.484       0.672       4.000   26.09%       3.000      4.000
+     NOT_SAFE              3.277      -0.901       1.000    2.67%       3.000      3.000      3.000
+             711.000       0.513       0.938       4.000   40.65%       4.000      4.000
+     DISR_LRN              2.561      -0.150       1.000   11.92%       2.000      2.000      3.000
+             713.000       0.740      -0.620       4.000   12.76%       3.000      3.000
+     GANGS                 2.999      -0.602       1.000    6.67%       2.000      3.000      3.000
+             705.000       0.759      -0.297       4.000   31.21%       3.000      4.000
+     RAC_FGHT              3.043      -0.623       1.000    5.17%       2.000      3.000      3.000
+             716.000       0.689      -0.128       4.000   31.56%       3.000      4.000
+     SCH_RULE              2.992      -0.340       1.000    1.53%       3.000      3.000      3.000
+             717.000       0.413       0.485       4.000   18.69%       3.000      3.000
+     PUN_SAME              2.631      -0.220       1.000   13.01%       2.000      2.000      3.000
+             715.000       0.840      -0.758       4.000   17.34%       3.000      3.000
+     STRICT                2.742      -0.344       1.000    4.34%       2.000      3.000      3.000
+             714.000       0.494       0.105       4.000   10.78%       3.000      3.000
+     PUN_RULE              2.771      -0.360       1.000    4.06%       2.000      3.000      3.000
+             715.000       0.490       0.159       4.000   11.61%       3.000      3.000
+
+
+SUMMARY OF MODEL FIT INFORMATION
+
+
+                   Number of                   Degrees of
+     Model        Parameters      Chi-Square    Freedom     P-Value
+
+     1-factor          42            483.023        77       0.0000
+     2-factor          55            250.673        64       0.0000
+     3-factor          67             92.392        52       0.0005
+     4-factor          78             32.369        41       0.8301
+     5-factor          88             21.900        31       0.8861
+
+                                               Degrees of
+     Models Compared              Chi-Square    Freedom     P-Value
+
+     1-factor against 2-factor       201.232        13       0.0000
+     2-factor against 3-factor       153.479        12       0.0000
+     3-factor against 4-factor        58.133        11       0.0000
+     4-factor against 5-factor         9.608        10       0.4755
+
+
+
+RESULTS FOR EXPLORATORY FACTOR ANALYSIS
+
+
+           EIGENVALUES FOR SAMPLE CORRELATION MATRIX
+                  1             2             3             4             5
+              ________      ________      ________      ________      ________
+                3.663         1.711         1.256         1.061         0.805
+
+
+           EIGENVALUES FOR SAMPLE CORRELATION MATRIX
+                  6             7             8             9            10
+              ________      ________      ________      ________      ________
+                0.785         0.749         0.722         0.648         0.603
+
+
+           EIGENVALUES FOR SAMPLE CORRELATION MATRIX
+                 11            12            13            14
+              ________      ________      ________      ________
+                0.553         0.534         0.503         0.408
+
+
+           AVERAGE EIGENVALUES FROM PARALLEL ANALYSIS
+                  1             2             3             4             5
+              ________      ________      ________      ________      ________
+                1.239         1.184         1.139         1.103         1.072
+
+
+           AVERAGE EIGENVALUES FROM PARALLEL ANALYSIS
+                  6             7             8             9            10
+              ________      ________      ________      ________      ________
+                1.039         1.009         0.979         0.953         0.923
+
+
+           AVERAGE EIGENVALUES FROM PARALLEL ANALYSIS
+                 11            12            13            14
+              ________      ________      ________      ________
+                0.893         0.862         0.826         0.780
+
+
+           95 PERCENTILE EIGENVALUES FROM PARALLEL ANALYSIS
+                  1             2             3             4             5
+              ________      ________      ________      ________      ________
+                1.294         1.229         1.176         1.135         1.099
+
+
+           95 PERCENTILE EIGENVALUES FROM PARALLEL ANALYSIS
+                  6             7             8             9            10
+              ________      ________      ________      ________      ________
+                1.062         1.034         1.006         0.974         0.945
+
+
+           95 PERCENTILE EIGENVALUES FROM PARALLEL ANALYSIS
+                 11            12            13            14
+              ________      ________      ________      ________
+                0.919         0.895         0.854         0.810
+
+
+EXPLORATORY FACTOR ANALYSIS WITH 1 FACTOR(S):
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       42
+
+Loglikelihood
+
+          H0 Value                      -10460.818
+          H0 Scaling Correction Factor      1.1735
+            for MLR
+          H1 Value                      -10161.539
+          H1 Scaling Correction Factor      1.2160
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                   21005.636
+          Bayesian (BIC)                 21197.965
+          Sample-Size Adjusted BIC       21064.603
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                            483.023*
+          Degrees of Freedom                    77
+          P-Value                           0.0000
+          Scaling Correction Factor         1.2392
+            for MLR
+
+*   The chi-square value for MLM, MLMV, MLR, ULSMV, WLSM and WLSMV cannot be used
+    for chi-square difference testing in the regular way.  MLM, MLR and WLSM
+    chi-square difference testing is described on the Mplus website.  MLMV, WLSMV,
+    and ULSMV difference testing is done using the DIFFTEST option.
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.086
+          90 Percent C.I.                    0.078  0.093
+          Probability RMSEA <= .05           0.000
+
+CFI/TLI
+
+          CFI                                0.714
+          TLI                                0.662
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                           1510.416
+          Degrees of Freedom                    91
+          P-Value                           0.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value                              0.078
+
+
+
+MINIMUM ROTATION FUNCTION VALUE       2.92224
+
+
+
+           GEOMIN ROTATED LOADINGS (* significant at 5% level)
+                  1
+              ________
+ STU_TCH        0.459*
+ SC_SPIRT       0.455*
+ TCH_GOOD       0.681*
+ TCH_INTR       0.723*
+ TCH_PRAI       0.594*
+ STU_DWN        0.225*
+ NOT_SAFE       0.408*
+ DISR_LRN       0.221*
+ GANGS          0.308*
+ RAC_FGHT       0.250*
+ SCH_RULE       0.423*
+ PUN_SAME       0.497*
+ STRICT         0.399*
+ PUN_RULE       0.394*
+
+
+           GEOMIN FACTOR CORRELATIONS (* significant at 5% level)
+                  1
+              ________
+      1         1.000
+
+
+           ESTIMATED RESIDUAL VARIANCES
+              STU_TCH       SC_SPIRT      TCH_GOOD      TCH_INTR      TCH_PRAI
+              ________      ________      ________      ________      ________
+                0.789         0.793         0.536         0.478         0.647
+
+
+           ESTIMATED RESIDUAL VARIANCES
+              STU_DWN       NOT_SAFE      DISR_LRN      GANGS         RAC_FGHT
+              ________      ________      ________      ________      ________
+                0.949         0.833         0.951         0.905         0.937
+
+
+           ESTIMATED RESIDUAL VARIANCES
+              SCH_RULE      PUN_SAME      STRICT        PUN_RULE
+              ________      ________      ________      ________
+                0.821         0.753         0.841         0.845
+
+
+           S.E. GEOMIN ROTATED LOADINGS
+                  1
+              ________
+ STU_TCH        0.045
+ SC_SPIRT       0.037
+ TCH_GOOD       0.033
+ TCH_INTR       0.029
+ TCH_PRAI       0.030
+ STU_DWN        0.051
+ NOT_SAFE       0.051
+ DISR_LRN       0.049
+ GANGS          0.049
+ RAC_FGHT       0.052
+ SCH_RULE       0.044
+ PUN_SAME       0.037
+ STRICT         0.045
+ PUN_RULE       0.050
+
+
+           S.E. GEOMIN FACTOR CORRELATIONS
+                  1
+              ________
+      1         0.000
+
+
+           S.E. ESTIMATED RESIDUAL VARIANCES
+              STU_TCH       SC_SPIRT      TCH_GOOD      TCH_INTR      TCH_PRAI
+              ________      ________      ________      ________      ________
+                0.041         0.033         0.045         0.041         0.036
+
+
+           S.E. ESTIMATED RESIDUAL VARIANCES
+              STU_DWN       NOT_SAFE      DISR_LRN      GANGS         RAC_FGHT
+              ________      ________      ________      ________      ________
+                0.023         0.042         0.021         0.030         0.026
+
+
+           S.E. ESTIMATED RESIDUAL VARIANCES
+              SCH_RULE      PUN_SAME      STRICT        PUN_RULE
+              ________      ________      ________      ________
+                0.037         0.037         0.036         0.039
+
+
+           Est./S.E. GEOMIN ROTATED LOADINGS
+                  1
+              ________
+ STU_TCH       10.268
+ SC_SPIRT      12.429
+ TCH_GOOD      20.665
+ TCH_INTR      25.357
+ TCH_PRAI      19.806
+ STU_DWN        4.405
+ NOT_SAFE       8.016
+ DISR_LRN       4.537
+ GANGS          6.238
+ RAC_FGHT       4.771
+ SCH_RULE       9.616
+ PUN_SAME      13.324
+ STRICT         8.792
+ PUN_RULE       7.938
+
+
+           Est./S.E. GEOMIN FACTOR CORRELATIONS
+                  1
+              ________
+      1         0.000
+
+
+           Est./S.E. ESTIMATED RESIDUAL VARIANCES
+              STU_TCH       SC_SPIRT      TCH_GOOD      TCH_INTR      TCH_PRAI
+              ________      ________      ________      ________      ________
+               19.189        23.813        11.946        11.592        18.178
+
+
+           Est./S.E. ESTIMATED RESIDUAL VARIANCES
+              STU_DWN       NOT_SAFE      DISR_LRN      GANGS         RAC_FGHT
+              ________      ________      ________      ________      ________
+               41.204        20.017        44.354        29.758        35.780
+
+
+           Est./S.E. ESTIMATED RESIDUAL VARIANCES
+              SCH_RULE      PUN_SAME      STRICT        PUN_RULE
+              ________      ________      ________      ________
+               22.016        20.351        23.167        21.631
+
+
+EXPLORATORY FACTOR ANALYSIS WITH 2 FACTOR(S):
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       55
+
+Loglikelihood
+
+          H0 Value                      -10310.324
+          H0 Scaling Correction Factor      1.2497
+            for MLR
+          H1 Value                      -10161.539
+          H1 Scaling Correction Factor      1.2160
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                   20730.648
+          Bayesian (BIC)                 20982.507
+          Sample-Size Adjusted BIC       20807.866
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                            250.673*
+          Degrees of Freedom                    64
+          P-Value                           0.0000
+          Scaling Correction Factor         1.1871
+            for MLR
+
+*   The chi-square value for MLM, MLMV, MLR, ULSMV, WLSM and WLSMV cannot be used
+    for chi-square difference testing in the regular way.  MLM, MLR and WLSM
+    chi-square difference testing is described on the Mplus website.  MLMV, WLSMV,
+    and ULSMV difference testing is done using the DIFFTEST option.
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.064
+          90 Percent C.I.                    0.055  0.072
+          Probability RMSEA <= .05           0.003
+
+CFI/TLI
+
+          CFI                                0.868
+          TLI                                0.813
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                           1510.416
+          Degrees of Freedom                    91
+          P-Value                           0.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value                              0.048
+
+
+
+MINIMUM ROTATION FUNCTION VALUE       0.42949
+
+
+
+           GEOMIN ROTATED LOADINGS (* significant at 5% level)
+                  1             2
+              ________      ________
+ STU_TCH        0.383*        0.152*
+ SC_SPIRT       0.423*        0.068
+ TCH_GOOD       0.689*        0.007
+ TCH_INTR       0.730*        0.012
+ TCH_PRAI       0.638*       -0.058
+ STU_DWN        0.101         0.238*
+ NOT_SAFE       0.154*        0.525*
+ DISR_LRN       0.027         0.378*
+ GANGS          0.003         0.629*
+ RAC_FGHT      -0.078         0.663*
+ SCH_RULE       0.395*        0.061
+ PUN_SAME       0.514*       -0.020
+ STRICT         0.431*       -0.048
+ PUN_RULE       0.460*       -0.114
+
+
+           GEOMIN FACTOR CORRELATIONS (* significant at 5% level)
+                  1             2
+              ________      ________
+      1         1.000
+      2         0.364*        1.000
+
+
+           ESTIMATED RESIDUAL VARIANCES
+              STU_TCH       SC_SPIRT      TCH_GOOD      TCH_INTR      TCH_PRAI
+              ________      ________      ________      ________      ________
+                0.788         0.795         0.522         0.460         0.616
+
+
+           ESTIMATED RESIDUAL VARIANCES
+              STU_DWN       NOT_SAFE      DISR_LRN      GANGS         RAC_FGHT
+              ________      ________      ________      ________      ________
+                0.916         0.642         0.849         0.603         0.591
+
+
+           ESTIMATED RESIDUAL VARIANCES
+              SCH_RULE      PUN_SAME      STRICT        PUN_RULE
+              ________      ________      ________      ________
+                0.822         0.743         0.827         0.814
+
+
+           S.E. GEOMIN ROTATED LOADINGS
+                  1             2
+              ________      ________
+ STU_TCH        0.057         0.059
+ SC_SPIRT       0.045         0.056
+ TCH_GOOD       0.037         0.020
+ TCH_INTR       0.040         0.033
+ TCH_PRAI       0.036         0.047
+ STU_DWN        0.074         0.084
+ NOT_SAFE       0.076         0.076
+ DISR_LRN       0.063         0.069
+ GANGS          0.006         0.049
+ RAC_FGHT       0.056         0.052
+ SCH_RULE       0.061         0.077
+ PUN_SAME       0.063         0.081
+ STRICT         0.060         0.071
+ PUN_RULE       0.076         0.091
+
+
+           S.E. GEOMIN FACTOR CORRELATIONS
+                  1             2
+              ________      ________
+      1         0.000
+      2         0.078         0.000
+
+
+           S.E. ESTIMATED RESIDUAL VARIANCES
+              STU_TCH       SC_SPIRT      TCH_GOOD      TCH_INTR      TCH_PRAI
+              ________      ________      ________      ________      ________
+                0.039         0.033         0.048         0.049         0.037
+
+
+           S.E. ESTIMATED RESIDUAL VARIANCES
+              STU_DWN       NOT_SAFE      DISR_LRN      GANGS         RAC_FGHT
+              ________      ________      ________      ________      ________
+                0.033         0.055         0.042         0.063         0.064
+
+
+           S.E. ESTIMATED RESIDUAL VARIANCES
+              SCH_RULE      PUN_SAME      STRICT        PUN_RULE
+              ________      ________      ________      ________
+                0.038         0.045         0.041         0.055
+
+
+           Est./S.E. GEOMIN ROTATED LOADINGS
+                  1             2
+              ________      ________
+ STU_TCH        6.760         2.583
+ SC_SPIRT       9.418         1.214
+ TCH_GOOD      18.723         0.347
+ TCH_INTR      18.344         0.364
+ TCH_PRAI      17.531        -1.248
+ STU_DWN        1.368         2.823
+ NOT_SAFE       2.035         6.898
+ DISR_LRN       0.433         5.454
+ GANGS          0.510        12.716
+ RAC_FGHT      -1.379        12.678
+ SCH_RULE       6.520         0.795
+ PUN_SAME       8.172        -0.251
+ STRICT         7.231        -0.672
+ PUN_RULE       6.068        -1.253
+
+
+           Est./S.E. GEOMIN FACTOR CORRELATIONS
+                  1             2
+              ________      ________
+      1         0.000
+      2         4.690         0.000
+
+
+           Est./S.E. ESTIMATED RESIDUAL VARIANCES
+              STU_TCH       SC_SPIRT      TCH_GOOD      TCH_INTR      TCH_PRAI
+              ________      ________      ________      ________      ________
+               19.955        24.089        10.882         9.329        16.528
+
+
+           Est./S.E. ESTIMATED RESIDUAL VARIANCES
+              STU_DWN       NOT_SAFE      DISR_LRN      GANGS         RAC_FGHT
+              ________      ________      ________      ________      ________
+               27.399        11.659        20.148         9.544         9.266
+
+
+           Est./S.E. ESTIMATED RESIDUAL VARIANCES
+              SCH_RULE      PUN_SAME      STRICT        PUN_RULE
+              ________      ________      ________      ________
+               21.581        16.417        20.155        14.799
+
+
+           FACTOR STRUCTURE
+                  1             2
+              ________      ________
+ STU_TCH        0.438         0.291
+ SC_SPIRT       0.448         0.222
+ TCH_GOOD       0.691         0.257
+ TCH_INTR       0.735         0.278
+ TCH_PRAI       0.617         0.174
+ STU_DWN        0.187         0.274
+ NOT_SAFE       0.345         0.581
+ DISR_LRN       0.165         0.388
+ GANGS          0.231         0.630
+ RAC_FGHT       0.163         0.635
+ SCH_RULE       0.418         0.205
+ PUN_SAME       0.506         0.166
+ STRICT         0.414         0.109
+ PUN_RULE       0.418         0.053
+
+
+EXPLORATORY FACTOR ANALYSIS WITH 3 FACTOR(S):
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       67
+
+Loglikelihood
+
+          H0 Value                      -10215.917
+          H0 Scaling Correction Factor      1.2462
+            for MLR
+          H1 Value                      -10161.539
+          H1 Scaling Correction Factor      1.2160
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                   20565.835
+          Bayesian (BIC)                 20872.645
+          Sample-Size Adjusted BIC       20659.901
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                             92.392*
+          Degrees of Freedom                    52
+          P-Value                           0.0005
+          Scaling Correction Factor         1.1771
+            for MLR
+
+*   The chi-square value for MLM, MLMV, MLR, ULSMV, WLSM and WLSMV cannot be used
+    for chi-square difference testing in the regular way.  MLM, MLR and WLSM
+    chi-square difference testing is described on the Mplus website.  MLMV, WLSMV,
+    and ULSMV difference testing is done using the DIFFTEST option.
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.033
+          90 Percent C.I.                    0.022  0.044
+          Probability RMSEA <= .05           0.997
+
+CFI/TLI
+
+          CFI                                0.972
+          TLI                                0.950
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                           1510.416
+          Degrees of Freedom                    91
+          P-Value                           0.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value                              0.027
+
+
+
+MINIMUM ROTATION FUNCTION VALUE       0.25733
+
+
+
+           GEOMIN ROTATED LOADINGS (* significant at 5% level)
+                  1             2             3
+              ________      ________      ________
+ STU_TCH        0.476*        0.142*       -0.095
+ SC_SPIRT       0.358*        0.083         0.103
+ TCH_GOOD       0.744*       -0.004        -0.011
+ TCH_INTR       0.771*        0.004         0.013
+ TCH_PRAI       0.563*       -0.045         0.125*
+ STU_DWN        0.012         0.256*        0.132
+ NOT_SAFE       0.169*        0.526*        0.010
+ DISR_LRN      -0.025         0.390*        0.089
+ GANGS          0.043         0.607*       -0.004
+ RAC_FGHT      -0.040         0.649*       -0.012
+ SCH_RULE       0.098         0.099         0.460*
+ PUN_SAME       0.213*        0.023         0.450*
+ STRICT         0.179*       -0.015         0.376*
+ PUN_RULE      -0.011        -0.090         0.762*
+
+
+           GEOMIN FACTOR CORRELATIONS (* significant at 5% level)
+                  1             2             3
+              ________      ________      ________
+      1         1.000
+      2         0.305*        1.000
+      3         0.420*        0.173         1.000
+
+
+           ESTIMATED RESIDUAL VARIANCES
+              STU_TCH       SC_SPIRT      TCH_GOOD      TCH_INTR      TCH_PRAI
+              ________      ________      ________      ________      ________
+                0.746         0.802         0.456         0.395         0.624
+
+
+           ESTIMATED RESIDUAL VARIANCES
+              STU_DWN       NOT_SAFE      DISR_LRN      GANGS         RAC_FGHT
+              ________      ________      ________      ________      ________
+                0.902         0.637         0.835         0.614         0.596
+
+
+           ESTIMATED RESIDUAL VARIANCES
+              SCH_RULE      PUN_SAME      STRICT        PUN_RULE
+              ________      ________      ________      ________
+                0.710         0.664         0.773         0.441
+
+
+           S.E. GEOMIN ROTATED LOADINGS
+                  1             2             3
+              ________      ________      ________
+ STU_TCH        0.061         0.057         0.057
+ SC_SPIRT       0.055         0.051         0.063
+ TCH_GOOD       0.039         0.028         0.032
+ TCH_INTR       0.048         0.027         0.042
+ TCH_PRAI       0.050         0.043         0.057
+ STU_DWN        0.048         0.072         0.074
+ NOT_SAFE       0.068         0.065         0.047
+ DISR_LRN       0.037         0.061         0.064
+ GANGS          0.113         0.070         0.051
+ RAC_FGHT       0.119         0.071         0.052
+ SCH_RULE       0.067         0.072         0.055
+ PUN_SAME       0.064         0.037         0.065
+ STRICT         0.065         0.029         0.063
+ PUN_RULE       0.014         0.084         0.053
+
+
+           S.E. GEOMIN FACTOR CORRELATIONS
+                  1             2             3
+              ________      ________      ________
+      1         0.000
+      2         0.127         0.000
+      3         0.065         0.110         0.000
+
+
+           S.E. ESTIMATED RESIDUAL VARIANCES
+              STU_TCH       SC_SPIRT      TCH_GOOD      TCH_INTR      TCH_PRAI
+              ________      ________      ________      ________      ________
+                0.041         0.032         0.045         0.052         0.036
+
+
+           S.E. ESTIMATED RESIDUAL VARIANCES
+              STU_DWN       NOT_SAFE      DISR_LRN      GANGS         RAC_FGHT
+              ________      ________      ________      ________      ________
+                0.039         0.058         0.049         0.065         0.068
+
+
+           S.E. ESTIMATED RESIDUAL VARIANCES
+              SCH_RULE      PUN_SAME      STRICT        PUN_RULE
+              ________      ________      ________      ________
+                0.044         0.043         0.042         0.078
+
+
+           Est./S.E. GEOMIN ROTATED LOADINGS
+                  1             2             3
+              ________      ________      ________
+ STU_TCH        7.793         2.505        -1.685
+ SC_SPIRT       6.550         1.613         1.642
+ TCH_GOOD      19.189        -0.148        -0.337
+ TCH_INTR      16.006         0.136         0.314
+ TCH_PRAI      11.265        -1.029         2.204
+ STU_DWN        0.257         3.542         1.782
+ NOT_SAFE       2.477         8.124         0.207
+ DISR_LRN      -0.693         6.443         1.396
+ GANGS          0.384         8.686        -0.084
+ RAC_FGHT      -0.335         9.185        -0.233
+ SCH_RULE       1.465         1.371         8.355
+ PUN_SAME       3.312         0.633         6.920
+ STRICT         2.770        -0.520         5.986
+ PUN_RULE      -0.755        -1.072        14.389
+
+
+           Est./S.E. GEOMIN FACTOR CORRELATIONS
+                  1             2             3
+              ________      ________      ________
+      1         0.000
+      2         2.403         0.000
+      3         6.424         1.562         0.000
+
+
+           Est./S.E. ESTIMATED RESIDUAL VARIANCES
+              STU_TCH       SC_SPIRT      TCH_GOOD      TCH_INTR      TCH_PRAI
+              ________      ________      ________      ________      ________
+               18.161        24.974        10.103         7.556        17.454
+
+
+           Est./S.E. ESTIMATED RESIDUAL VARIANCES
+              STU_DWN       NOT_SAFE      DISR_LRN      GANGS         RAC_FGHT
+              ________      ________      ________      ________      ________
+               22.978        10.960        17.046         9.508         8.709
+
+
+           Est./S.E. ESTIMATED RESIDUAL VARIANCES
+              SCH_RULE      PUN_SAME      STRICT        PUN_RULE
+              ________      ________      ________      ________
+               15.962        15.530        18.499         5.668
+
+
+           FACTOR STRUCTURE
+                  1             2             3
+              ________      ________      ________
+ STU_TCH        0.479         0.271         0.129
+ SC_SPIRT       0.426         0.210         0.267
+ TCH_GOOD       0.738         0.221         0.301
+ TCH_INTR       0.778         0.241         0.337
+ TCH_PRAI       0.602         0.149         0.353
+ STU_DWN        0.146         0.283         0.181
+ NOT_SAFE       0.334         0.579         0.172
+ DISR_LRN       0.131         0.398         0.146
+ GANGS          0.227         0.620         0.119
+ RAC_FGHT       0.153         0.634         0.083
+ SCH_RULE       0.321         0.208         0.518
+ PUN_SAME       0.409         0.166         0.544
+ STRICT         0.332         0.105         0.449
+ PUN_RULE       0.282         0.038         0.742
+
+
+EXPLORATORY FACTOR ANALYSIS WITH 4 FACTOR(S):
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       78
+
+Loglikelihood
+
+          H0 Value                      -10180.395
+          H0 Scaling Correction Factor      1.2428
+            for MLR
+          H1 Value                      -10161.539
+          H1 Scaling Correction Factor      1.2160
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                   20516.789
+          Bayesian (BIC)                 20873.971
+          Sample-Size Adjusted BIC       20626.299
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                             32.369*
+          Degrees of Freedom                    41
+          P-Value                           0.8301
+          Scaling Correction Factor         1.1651
+            for MLR
+
+*   The chi-square value for MLM, MLMV, MLR, ULSMV, WLSM and WLSMV cannot be used
+    for chi-square difference testing in the regular way.  MLM, MLR and WLSM
+    chi-square difference testing is described on the Mplus website.  MLMV, WLSMV,
+    and ULSMV difference testing is done using the DIFFTEST option.
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.000
+          90 Percent C.I.                    0.000  0.016
+          Probability RMSEA <= .05           1.000
+
+CFI/TLI
+
+          CFI                                1.000
+          TLI                                1.000
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                           1510.416
+          Degrees of Freedom                    91
+          P-Value                           0.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value                              0.014
+
+
+
+MINIMUM ROTATION FUNCTION VALUE       0.45725
+
+
+
+           GEOMIN ROTATED LOADINGS (* significant at 5% level)
+                  1             2             3             4
+              ________      ________      ________      ________
+ STU_TCH        0.484*       -0.010         0.135*       -0.081
+ SC_SPIRT       0.352*        0.083         0.037         0.097
+ TCH_GOOD       0.741*       -0.017         0.000         0.001
+ TCH_INTR       0.768*       -0.025         0.012         0.029
+ TCH_PRAI       0.552*        0.055        -0.071         0.120*
+ STU_DWN       -0.011         0.574*       -0.049         0.045
+ NOT_SAFE       0.172*        0.415*        0.301*       -0.046
+ DISR_LRN      -0.036         0.414*        0.174         0.032
+ GANGS          0.011        -0.021         0.739*        0.044
+ RAC_FGHT      -0.036         0.135         0.584*        0.000
+ SCH_RULE       0.063        -0.044         0.176*        0.494*
+ PUN_SAME       0.187*        0.118*       -0.017         0.439*
+ STRICT         0.155*       -0.002         0.018         0.385*
+ PUN_RULE      -0.065        -0.003        -0.012         0.775*
+
+
+           GEOMIN FACTOR CORRELATIONS (* significant at 5% level)
+                  1             2             3             4
+              ________      ________      ________      ________
+      1         1.000
+      2         0.254*        1.000
+      3         0.277*        0.281*        1.000
+      4         0.441*        0.185*        0.053         1.000
+
+
+           ESTIMATED RESIDUAL VARIANCES
+              STU_TCH       SC_SPIRT      TCH_GOOD      TCH_INTR      TCH_PRAI
+              ________      ________      ________      ________      ________
+                0.744         0.801         0.456         0.394         0.621
+
+
+           ESTIMATED RESIDUAL VARIANCES
+              STU_DWN       NOT_SAFE      DISR_LRN      GANGS         RAC_FGHT
+              ________      ________      ________      ________      ________
+                0.676         0.586         0.762         0.453         0.609
+
+
+           ESTIMATED RESIDUAL VARIANCES
+              SCH_RULE      PUN_SAME      STRICT        PUN_RULE
+              ________      ________      ________      ________
+                0.690         0.659         0.773         0.440
+
+
+           S.E. GEOMIN ROTATED LOADINGS
+                  1             2             3             4
+              ________      ________      ________      ________
+ STU_TCH        0.055         0.069         0.068         0.054
+ SC_SPIRT       0.056         0.066         0.055         0.063
+ TCH_GOOD       0.040         0.047         0.038         0.031
+ TCH_INTR       0.049         0.044         0.031         0.045
+ TCH_PRAI       0.050         0.063         0.050         0.057
+ STU_DWN        0.033         0.073         0.064         0.052
+ NOT_SAFE       0.064         0.099         0.118         0.038
+ DISR_LRN       0.045         0.084         0.094         0.046
+ GANGS          0.032         0.031         0.082         0.040
+ RAC_FGHT       0.048         0.096         0.090         0.040
+ SCH_RULE       0.055         0.063         0.057         0.061
+ PUN_SAME       0.074         0.059         0.044         0.067
+ STRICT         0.075         0.057         0.048         0.067
+ PUN_RULE       0.035         0.030         0.037         0.050
+
+
+           S.E. GEOMIN FACTOR CORRELATIONS
+                  1             2             3             4
+              ________      ________      ________      ________
+      1         0.000
+      2         0.086         0.000
+      3         0.057         0.117         0.000
+      4         0.066         0.076         0.071         0.000
+
+
+           S.E. ESTIMATED RESIDUAL VARIANCES
+              STU_TCH       SC_SPIRT      TCH_GOOD      TCH_INTR      TCH_PRAI
+              ________      ________      ________      ________      ________
+                0.041         0.033         0.045         0.051         0.037
+
+
+           S.E. ESTIMATED RESIDUAL VARIANCES
+              STU_DWN       NOT_SAFE      DISR_LRN      GANGS         RAC_FGHT
+              ________      ________      ________      ________      ________
+                0.088         0.053         0.052         0.116         0.064
+
+
+           S.E. ESTIMATED RESIDUAL VARIANCES
+              SCH_RULE      PUN_SAME      STRICT        PUN_RULE
+              ________      ________      ________      ________
+                0.049         0.042         0.042         0.076
+
+
+           Est./S.E. GEOMIN ROTATED LOADINGS
+                  1             2             3             4
+              ________      ________      ________      ________
+ STU_TCH        8.802        -0.139         1.986        -1.508
+ SC_SPIRT       6.263         1.258         0.676         1.539
+ TCH_GOOD      18.505        -0.356         0.009         0.047
+ TCH_INTR      15.534        -0.566         0.384         0.650
+ TCH_PRAI      11.142         0.871        -1.406         2.123
+ STU_DWN       -0.333         7.887        -0.771         0.866
+ NOT_SAFE       2.688         4.188         2.556        -1.196
+ DISR_LRN      -0.792         4.938         1.850         0.681
+ GANGS          0.350        -0.693         8.991         1.091
+ RAC_FGHT      -0.741         1.405         6.519        -0.003
+ SCH_RULE       1.137        -0.686         3.112         8.129
+ PUN_SAME       2.535         2.005        -0.384         6.507
+ STRICT         2.060        -0.028         0.383         5.755
+ PUN_RULE      -1.833        -0.095        -0.320        15.389
+
+
+           Est./S.E. GEOMIN FACTOR CORRELATIONS
+                  1             2             3             4
+              ________      ________      ________      ________
+      1         0.000
+      2         2.948         0.000
+      3         4.829         2.396         0.000
+      4         6.712         2.452         0.746         0.000
+
+
+           Est./S.E. ESTIMATED RESIDUAL VARIANCES
+              STU_TCH       SC_SPIRT      TCH_GOOD      TCH_INTR      TCH_PRAI
+              ________      ________      ________      ________      ________
+               17.927        24.566        10.099         7.763        16.964
+
+
+           Est./S.E. ESTIMATED RESIDUAL VARIANCES
+              STU_DWN       NOT_SAFE      DISR_LRN      GANGS         RAC_FGHT
+              ________      ________      ________      ________      ________
+                7.723        10.949        14.689         3.900         9.518
+
+
+           Est./S.E. ESTIMATED RESIDUAL VARIANCES
+              SCH_RULE      PUN_SAME      STRICT        PUN_RULE
+              ________      ________      ________      ________
+               14.029        15.645        18.482         5.767
+
+
+           FACTOR STRUCTURE
+                  1             2             3             4
+              ________      ________      ________      ________
+ STU_TCH        0.483         0.136         0.262         0.137
+ SC_SPIRT       0.427         0.201         0.163         0.270
+ TCH_GOOD       0.737         0.172         0.201         0.325
+ TCH_INTR       0.778         0.179         0.219         0.363
+ TCH_PRAI       0.599         0.197         0.104         0.370
+ STU_DWN        0.141         0.565         0.111         0.144
+ NOT_SAFE       0.341         0.535         0.463         0.123
+ DISR_LRN       0.131         0.460         0.282         0.102
+ GANGS          0.230         0.197         0.738         0.084
+ RAC_FGHT       0.161         0.290         0.612         0.040
+ SCH_RULE       0.318         0.113         0.207         0.523
+ PUN_SAME       0.406         0.242         0.091         0.542
+ STRICT         0.329         0.114         0.081         0.454
+ PUN_RULE       0.273         0.121         0.010         0.745
+
+
+EXPLORATORY FACTOR ANALYSIS WITH 5 FACTOR(S):
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       88
+
+Loglikelihood
+
+          H0 Value                      -10172.905
+          H0 Scaling Correction Factor      1.2787
+            for MLR
+          H1 Value                      -10161.539
+          H1 Scaling Correction Factor      1.2160
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                   20521.810
+          Bayesian (BIC)                 20924.784
+          Sample-Size Adjusted BIC       20645.359
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit
+
+          Value                             21.900*
+          Degrees of Freedom                    31
+          P-Value                           0.8861
+          Scaling Correction Factor         1.0380
+            for MLR
+
+*   The chi-square value for MLM, MLMV, MLR, ULSMV, WLSM and WLSMV cannot be used
+    for chi-square difference testing in the regular way.  MLM, MLR and WLSM
+    chi-square difference testing is described on the Mplus website.  MLMV, WLSMV,
+    and ULSMV difference testing is done using the DIFFTEST option.
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+          Estimate                           0.000
+          90 Percent C.I.                    0.000  0.014
+          Probability RMSEA <= .05           1.000
+
+CFI/TLI
+
+          CFI                                1.000
+          TLI                                1.000
+
+Chi-Square Test of Model Fit for the Baseline Model
+
+          Value                           1510.416
+          Degrees of Freedom                    91
+          P-Value                           0.0000
+
+SRMR (Standardized Root Mean Square Residual)
+
+          Value                              0.010
+
+
+
+MINIMUM ROTATION FUNCTION VALUE       0.37773
+
+
+
+           GEOMIN ROTATED LOADINGS (* significant at 5% level)
+                  1             2             3             4             5
+              ________      ________      ________      ________      ________
+ STU_TCH        0.356         0.391         0.024        -0.002         0.008
+ SC_SPIRT       0.325*        0.068         0.094        -0.003         0.108
+ TCH_GOOD       0.717*        0.064        -0.019         0.003        -0.002
+ TCH_INTR       0.790*       -0.013        -0.029         0.027        -0.007
+ TCH_PRAI       0.660*       -0.205         0.029         0.004         0.028
+ STU_DWN       -0.002        -0.095         0.568*       -0.104         0.026
+ NOT_SAFE       0.115         0.106         0.516*        0.139        -0.028
+ DISR_LRN      -0.039        -0.040         0.465*        0.090         0.018
+ GANGS          0.033        -0.031         0.003         0.863*        0.013
+ RAC_FGHT      -0.043         0.080         0.244         0.422         0.000
+ SCH_RULE      -0.002         0.167        -0.014         0.087         0.554*
+ PUN_SAME       0.177*        0.013         0.124*       -0.063         0.442*
+ STRICT         0.163        -0.007         0.002         0.002         0.376*
+ PUN_RULE      -0.022        -0.081        -0.020        -0.001         0.743*
+
+
+           GEOMIN FACTOR CORRELATIONS (* significant at 5% level)
+                  1             2             3             4             5
+              ________      ________      ________      ________      ________
+      1         1.000
+      2         0.285         1.000
+      3         0.331*        0.161         1.000
+      4         0.219*        0.319         0.365         1.000
+      5         0.474*       -0.076         0.218*        0.088         1.000
+
+
+           ESTIMATED RESIDUAL VARIANCES
+              STU_TCH       SC_SPIRT      TCH_GOOD      TCH_INTR      TCH_PRAI
+              ________      ________      ________      ________      ________
+                0.630         0.798         0.465         0.392         0.568
+
+
+           ESTIMATED RESIDUAL VARIANCES
+              STU_DWN       NOT_SAFE      DISR_LRN      GANGS         RAC_FGHT
+              ________      ________      ________      ________      ________
+                0.706         0.567         0.759         0.253         0.668
+
+
+           ESTIMATED RESIDUAL VARIANCES
+              SCH_RULE      PUN_SAME      STRICT        PUN_RULE
+              ________      ________      ________      ________
+                0.660         0.655         0.773         0.452
+
+
+           S.E. GEOMIN ROTATED LOADINGS
+                  1             2             3             4             5
+              ________      ________      ________      ________      ________
+ STU_TCH        0.387         0.372         0.035         0.044         0.046
+ SC_SPIRT       0.101         0.118         0.063         0.076         0.073
+ TCH_GOOD       0.115         0.194         0.055         0.054         0.045
+ TCH_INTR       0.048         0.070         0.042         0.060         0.057
+ TCH_PRAI       0.104         0.195         0.044         0.047         0.050
+ STU_DWN        0.034         0.167         0.066         0.245         0.050
+ NOT_SAFE       0.164         0.154         0.227         0.462         0.049
+ DISR_LRN       0.071         0.077         0.150         0.304         0.063
+ GANGS          0.041         0.040         0.071         0.364         0.045
+ RAC_FGHT       0.058         0.280         0.280         0.504         0.066
+ SCH_RULE       0.088         0.153         0.059         0.123         0.064
+ PUN_SAME       0.085         0.053         0.057         0.081         0.074
+ STRICT         0.096         0.078         0.059         0.064         0.082
+ PUN_RULE       0.092         0.156         0.055         0.068         0.061
+
+
+           S.E. GEOMIN FACTOR CORRELATIONS
+                  1             2             3             4             5
+              ________      ________      ________      ________      ________
+      1         0.000
+      2         0.517         0.000
+      3         0.075         0.120         0.000
+      4         0.086         0.182         0.311         0.000
+      5         0.081         0.374         0.084         0.077         0.000
+
+
+           S.E. ESTIMATED RESIDUAL VARIANCES
+              STU_TCH       SC_SPIRT      TCH_GOOD      TCH_INTR      TCH_PRAI
+              ________      ________      ________      ________      ________
+                0.167         0.034         0.043         0.052         0.062
+
+
+           S.E. ESTIMATED RESIDUAL VARIANCES
+              STU_DWN       NOT_SAFE      DISR_LRN      GANGS         RAC_FGHT
+              ________      ________      ________      ________      ________
+                0.093         0.063         0.050         0.677         0.130
+
+
+           S.E. ESTIMATED RESIDUAL VARIANCES
+              SCH_RULE      PUN_SAME      STRICT        PUN_RULE
+              ________      ________      ________      ________
+                0.056         0.041         0.042         0.075
+
+
+           Est./S.E. GEOMIN ROTATED LOADINGS
+                  1             2             3             4             5
+              ________      ________      ________      ________      ________
+ STU_TCH        0.918         1.051         0.689        -0.039         0.177
+ SC_SPIRT       3.202         0.581         1.496        -0.035         1.473
+ TCH_GOOD       6.243         0.332        -0.343         0.053        -0.047
+ TCH_INTR      16.474        -0.187        -0.684         0.442        -0.116
+ TCH_PRAI       6.355        -1.051         0.661         0.082         0.561
+ STU_DWN       -0.051        -0.570         8.605        -0.426         0.520
+ NOT_SAFE       0.702         0.689         2.271         0.300        -0.581
+ DISR_LRN      -0.546        -0.517         3.091         0.297         0.292
+ GANGS          0.813        -0.776         0.045         2.371         0.286
+ RAC_FGHT      -0.735         0.285         0.873         0.839        -0.005
+ SCH_RULE      -0.017         1.088        -0.238         0.708         8.647
+ PUN_SAME       2.099         0.255         2.164        -0.777         5.949
+ STRICT         1.691        -0.095         0.036         0.035         4.579
+ PUN_RULE      -0.238        -0.518        -0.372        -0.016        12.097
+
+
+           Est./S.E. GEOMIN FACTOR CORRELATIONS
+                  1             2             3             4             5
+              ________      ________      ________      ________      ________
+      1         0.000
+      2         0.551         0.000
+      3         4.413         1.344         0.000
+      4         2.548         1.750         1.172         0.000
+      5         5.872        -0.204         2.598         1.138         0.000
+
+
+           Est./S.E. ESTIMATED RESIDUAL VARIANCES
+              STU_TCH       SC_SPIRT      TCH_GOOD      TCH_INTR      TCH_PRAI
+              ________      ________      ________      ________      ________
+                3.767        23.685        10.756         7.476         9.155
+
+
+           Est./S.E. ESTIMATED RESIDUAL VARIANCES
+              STU_DWN       NOT_SAFE      DISR_LRN      GANGS         RAC_FGHT
+              ________      ________      ________      ________      ________
+                7.548         8.979        15.117         0.373         5.148
+
+
+           Est./S.E. ESTIMATED RESIDUAL VARIANCES
+              SCH_RULE      PUN_SAME      STRICT        PUN_RULE
+              ________      ________      ________      ________
+               11.793        15.873        18.527         6.028
+
+
+           FACTOR STRUCTURE
+                  1             2             3             4             5
+              ________      ________      ________      ________      ________
+ STU_TCH        0.478         0.495         0.206         0.211         0.152
+ SC_SPIRT       0.426         0.167         0.235         0.134         0.277
+ TCH_GOOD       0.729         0.266         0.229         0.174         0.329
+ TCH_INTR       0.779         0.216         0.239         0.185         0.364
+ TCH_PRAI       0.625        -0.014         0.222         0.096         0.363
+ STU_DWN        0.148        -0.040         0.519         0.074         0.147
+ NOT_SAFE       0.333         0.268         0.615         0.383         0.142
+ DISR_LRN       0.132         0.051         0.482         0.240         0.112
+ GANGS          0.221         0.253         0.327         0.863         0.107
+ RAC_FGHT       0.153         0.242         0.397         0.527         0.064
+ SCH_RULE       0.323         0.150         0.165         0.183         0.545
+ PUN_SAME       0.418         0.030         0.259         0.064         0.547
+ STRICT         0.340         0.011         0.138         0.069         0.454
+ PUN_RULE       0.300        -0.148         0.121         0.026         0.734
+
+
+PLOT INFORMATION
+
+The following plots are available:
+
+  Histograms (sample values)
+  Scatterplots (sample values)
+  Eigenvalues for exploratory factor analysis
+
+     Beginning Time:  11:07:18
+        Ending Time:  11:07:19
+       Elapsed Time:  00:00:01
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2021 Muthen & Muthen

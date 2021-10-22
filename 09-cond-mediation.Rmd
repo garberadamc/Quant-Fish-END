@@ -1,0 +1,357 @@
+---
+title: "Moderation, Mediation, & Conditional Indirect Effects"
+author: '*Adam Garber*'
+subtitle: "A Course in `MplusAutomation`" 
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, message = FALSE, warning = FALSE)
+library(linguisticsdown)
+```
+
+# --------------------------------------------------------------------------------------
+
+## Outline
+
+
+1. Estimate a moderation model with a continuous moderator
+2. Plot simple slopes with `ggplot` using data extracted from `.gh5` file produced by Mplus output
+4. Estimate a conditional mediation model with the `teams` data
+
+# --------------------------------------------------------------------------------------
+
+## Preparation
+
+Install the {`rhdf5`} package to read `.gh5` files
+```{r, eval=FALSE}
+
+if (!requireNamespace("BiocManager", quietly = TRUE))
+install.packages("BiocManager")
+BiocManager::install("rhdf5")
+
+```
+
+
+```{r, eval=TRUE}
+
+library(tidyverse)
+library(rhdf5)
+library(MplusAutomation)
+library(here)
+library(gt)
+library(gtsummary)
+library(mediation)
+library(carData)
+library(plotly)
+library(viridis)
+```
+
+## Upload list of `mplus.R` functions 
+
+http://www.statmodel.com/mplus-R/mplus.R
+```{r}
+source(here("09-cond-mediation","mplus.R.txt"))
+```
+
+
+## Data sources:
+
+Models are adapted to demonstrate moderation and conditional mediation effects:
+
+1. The first example utilize the *Vocabulary and Education* dataset from the National Opinion Research Center General Social Survey. GSS Cumulative Datafile 1972-2016 (Fox, 2008) [$\color{blue}{\text{See documentation here}}$](https://vincentarelbundock.github.io/Rdatasets/doc/carData/Vocab.html)
+
+To see metadata run - `?carData::Vocab` 
+
+2. The second example is from chapter 3 of the book, *Regression and mediation analysis using Mplus*, by Muthen et al., 2017. The dataset is called `teams` and is from a study about automobile parts work teams (Cole et al., 2008). This model is also discussed in the Hayes (2013) book on mediation. 
+
+# --------------------------------------------------------------------------------------
+
+Read the `Vocab` data.frame into your R-environment from package {`carData`}
+```{r}
+
+data(Vocab)
+
+vocab <- Vocab %>% 
+  mutate(allyears = year - 1973)
+
+```
+
+# --------------------------------------------------------------------------------------
+
+Starting with a familiar example but with moderator as continuous
+```{r, eval=TRUE, echo=FALSE}
+
+var_table <- tribble(
+   ~"Name",      ~"Labels",                                     
+ #--------------|--------------------------------|,
+  "allyears (M)"    , "Year of the survey (1974 - 2016)"         ,
+  "education (X)"   , "Students education in years"          ,
+  "vocabulary (Y)"  , "Vocabulary test score: number correct on a 10-word test"   )
+
+var_table %>% gt()
+```
+
+
+# --------------------------------------------------------------------------------------
+
+## Model 1: Run moderation model with `year` (range: 1- 43) as a continuous moderator variable 
+```{r, eval=FALSE}
+m1_contmod  <- mplusObject(
+  TITLE = "m1 condition mediation (continuous moderator)", 
+  VARIABLE = 
+    "usevar =
+     allyears education vocabulary int_yred; ", 
+  
+  DEFINE = 
+    "!center education (grandmean);     ! leave un-centered for plot
+     int_yred = allyears*education;     ! create interaction term ",
+  
+  ANALYSIS = 
+    "estimator = MLR" ,
+  
+  MODEL = 
+   "[vocabulary](b0);
+   
+    vocabulary on
+    allyears(b1)
+    education(b2)
+    int_yred(b3); " ,
+  
+  MODELCONSTRAINT =  
+  "LOOP(x,6.62,19.18,0.01);
+   PLOT(y1974 y1984 y1995 y2005 y2016);
+   y1974 = b0 + b1*1  + b2*x + b3*x*1;
+   y1984 = b0 + b1*10 + b2*x + b3*x*10;
+   y1995 = b0 + b1*21 + b2*x + b3*x*21;
+   y2005 = b0 + b1*31 + b2*x + b3*x*31;
+   y2016 = b0 + b1*42 + b2*x + b3*x*42; ",
+  
+  OUTPUT = "sampstat standardized modindices (3.84)",
+  
+  PLOT = "type=plot3;",
+  
+  usevariables = colnames(vocab),   
+  rdata = vocab)                    
+
+m1_contmod_fit <- mplusModeler(m1_contmod,
+                  dataout=here("09-cond-mediation", "mplus_files", "vocab.dat"),       
+                  modelout=here("09-cond-mediation", "mplus_files", "m1_contmod.inp"),
+                  check=TRUE, run = TRUE, hashfilename = FALSE)
+```
+
+# --------------------------------------------------------------------------------------
+
+## Plotting using data extracted from `gh5` files produced by `Mplus`
+
+1. View plots available for a given model 
+2. Generate plots using the `get.plot.___` function
+3. Extract data and transform to tidy format
+4. Plot with `ggplot`
+
+```{r, eval=FALSE}
+mplus.view.plots(here("09-cond-mediation","mplus_files", "m1_contmod.gh5"))
+```
+
+```{r, eval=FALSE}
+mplus.plot.loop(here("09-cond-mediation","mplus_files", "m1_contmod.gh5"),label =3)
+```
+
+# --------------------------------------------------------------------------------------
+
+Prepare plot data 
+```{r}
+loop_data2 <- lapply(1:5, function(k) {
+  
+y_val <- mplus.get.loop.estimates(here("09-cond-mediation","mplus_files", "m1_contmod.gh5"),label=k)
+lower <- mplus.get.loop.lowerci(here("09-cond-mediation","mplus_files", "m1_contmod.gh5"),label=k)
+upper <- mplus.get.loop.upperci(here("09-cond-mediation","mplus_files", "m1_contmod.gh5"),label=k)
+x_val <- mplus.get.loop.xvalues(here("09-cond-mediation","mplus_files", "m1_contmod.gh5")) 
+  
+  loop_data2 <- as.data.frame(cbind(y_val, x_val, lower, upper)) %>%
+    mutate(group = factor(k)) 
+  
+})
+
+plot_data2 <- bind_rows(loop_data2) 
+```
+
+
+Plot simple slopes moderation plot with standard error bands
+```{r}
+
+cont_plot <- ggplot(plot_data2, aes(x=x_val, y=y_val,
+                      group = group, color = as.numeric(group))) +
+  geom_ribbon(aes(ymin = lower, ymax = upper),
+              fill = "blue", alpha = .2, size = 0) +
+  geom_line(size=.7) +
+  scale_color_viridis_c(name = "Year", labels = c("1974", "1984", "1995", "2005", "2016")) +
+  labs(y = "Vocabulary" , x = "Teaching Experience") +
+  theme_minimal() 
+```
+
+Create interactive plot with `ggplotly`
+```{r}
+ggplotly(cont_plot)
+```
+
+# --------------------------------------------------------------------------------------
+
+## Mediation: Conditional indirect effect model 
+
+This version of of moderated mediation is described as `case 2` in the Muthen et al. (2016) text. 
+```{r, eval=TRUE, echo=FALSE, results='asis'}
+
+var_table2 <- tribble(
+   ~"Name",      ~"Labels",                                     
+ #--------------|--------------------------------|,
+  "dysfunc (X)" , "Dysfunctional behavior of team members"         ,
+  "negexp (Z)"  , "Nonverbal negative expressibility between team members (measured by supervisor)",
+  "negtone (M)" , "Negative affective tone expressed by team members"          ,
+  "perform (Y)" , "Team performance using measures of efficiency, timeliness, and objectives"   )
+
+var_table2 %>% gt()
+```
+
+
+```{r, echo=FALSE, eval=TRUE, out.width = "80%", out.height= "80%", fig.pos="h"}
+include_graphics2("https://garberadamc.github.io/project-site/figures/Mediate_MZ_lab5.png")
+```
+
+
+Read in data
+```{r}
+
+teams <- read_table(here("09-cond-mediation","data", "teams.txt"), col_names = FALSE) 
+
+colnames(teams) <- c("dysfunc", "negtone", "negexp", "perform")
+
+```
+
+## Model 2: Estimate conditional indirect effect model 
+```{r, eval=FALSE}
+
+m2_teams  <- mplusObject(
+  TITLE = 
+   "Data source - Hayes (2013) TEAMS Case 2 moderation of M -> Y ", 
+  
+  VARIABLE = 
+   "usevar = dysfunc negtone negexp perform mz;",
+  
+  DEFINE = 
+    "MZ = negtone*negexp;  ! create interaction term ",
+  
+  ANALYSIS =  
+    "! set number of bootstrap draws (small # for demonstration purposes)
+     bootstrap = 500; " , 
+  
+  MODEL = 
+   "perform on            !!! outcome (Y)
+    negtone               !!! mediator (M)
+    dysfunc               !!! covariate (X)
+    negexp                !!! moderator (Z)
+    mz;                   !!! interaction (MZ)
+    
+    negtone on dysfunc;   !!! path X -> M 
+  
+    Model indirect:
+    perform MOD
+    negtone negexp(-0.4,0.6,0.1) mz dysfunc(0.4038 0.035); ",
+     
+  OUTPUT = 
+    "sampstat standardized cinterval (bcbootstrap); ! bias-corrected bootstrap", 
+  
+  PLOT = "type=plot3;",
+  
+  
+  usevariables = colnames(teams),   
+  rdata = teams)                    
+
+m2_teams_fit <- mplusModeler(m2_teams,
+                dataout=here("09-cond-mediation", "mplus_files", "teams.dat"),       
+                modelout=here("09-cond-mediation", "mplus_files", "m2_teams.inp"),
+                check=TRUE, run = TRUE, hashfilename = FALSE)
+
+```
+
+# --------------------------------------------------------------------------------------
+
+Take a look at bootstrap distribution of the indirect effect to view asymptotic shape.
+```{r}
+mplus.plot.bootstrap.distribution(here("09-cond-mediation", "mplus_files", "m2_teams.gh5"), parameter = 38)
+```
+
+# --------------------------------------------------------------------------------------
+
+To see animation of how the bootsrap distribution changes with increasing sample draws (N) go here:
+https://raw.githubusercontent.com/minimaxir/frames-to-gif-osx/master/examples/uni_frames.gif
+
+# --------------------------------------------------------------------------------------
+
+Create plot of moderated direct and indirect effects 
+```{r}
+
+label <- c('Total natural DE', 'Total natural IE')
+
+mod_data <- lapply(1:2, function(k) {
+  y_val <- mplus.get.moderation.estimates(here("09-cond-mediation","mplus_files", "m2_teams.gh5"),label[k])
+  lower <- mplus.get.moderation.lowerci(here("09-cond-mediation","mplus_files"  , "m2_teams.gh5"),label[k])
+  upper <- mplus.get.moderation.upperci(here("09-cond-mediation","mplus_files"  , "m2_teams.gh5"),label[k])
+  x_val <- mplus.get.moderation.xvalues(here("09-cond-mediation","mplus_files"  , "m2_teams.gh5"))
+  
+  mod_data <- as.data.frame(cbind(y_val, x_val, lower, upper)) %>%
+    mutate(group = factor(k)) 
+})
+
+plot_data2 <- bind_rows(mod_data) 
+
+ggplot(plot_data2, aes(x=x_val, y=y_val,
+                      group = group, color = group, fill = group)) +
+  geom_ribbon(aes(ymin = lower, ymax = upper),
+              alpha = .2, size = 0, show.legend = FALSE) +
+  geom_line(size=.8) +
+  geom_hline(yintercept = 0, alpha =.8, linetype = 2) +
+  scale_x_continuous(expand = c(0,0)) +
+  scale_color_manual(values=c("darkblue", "magenta"),
+                     name = "Year", labels = c("Direct Effect", "Indirect Effect")) +
+  labs(y = "Effect" , x = "Negative Expectations") +
+  theme_minimal() 
+  
+
+```
+
+# --------------------------------------------------------------------------------------
+
+## References
+
+Brader T, Valentino NA, Suhat E (2008). What Triggers Public Opposition to Immigration?
+Anxiety, Group Cues, and Immigration. American Journal of Political Science, 52(4),
+959–978.
+
+Hallquist, M. N., & Wiley, J. F. (2018). MplusAutomation: An R Package for Facilitating Large-Scale Latent Variable Analyses in Mplus. Structural equation modeling: a multidisciplinary journal, 25(4), 621-638.
+
+Ingels, S. J., Pratt, D. J., Herget, D. R., Burns, L. J., Dever, J. A., Ottem, R., ... & Leinwand, S. (2011). High School Longitudinal Study of 2009 (HSLS: 09): Base-Year Data File Documentation. NCES 2011-328. National Center for Education Statistics.
+
+Muthén, B. O., Muthén, L. K., & Asparouhov, T. (2017). Regression and mediation analysis using Mplus. Los Angeles, CA: Muthén & Muthén.
+
+Muthén, L.K. and Muthén, B.O. (1998-2017).  Mplus User’s Guide.  Eighth Edition. Los Angeles, CA: Muthén & Muthén
+
+R Core Team (2017). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL http://www.R-project.org/
+
+Tingley, D., Yamamoto, T., Hirose, K., Keele, L., & Imai, K. (2014). Mediation: R package for causal mediation analysis.
+
+Vinokur AD, Price RH, Schul Y (1995). Impact of the JOBS Intervention on Unemployed Workers Varying in Risk for  Depression. American Journal of Community Psychology, 23(1), 39–74.
+
+Wickham et al., (2019). Welcome to the tidyverse. Journal of Open Source Software, 4(43), 1686, https://doi.org/10.21105/joss.01686
+
+# --------------------------------------------------------------------------------------
+
+## Further resources & examples here:
+  
+$\color{blue}{\text{https://garberadamc.github.io/project-site/}}$
+
+$\color{blue}{\text{https://www.adam-garber.com/}}$
+  
+# --------------------------------------------------------------------------------------
