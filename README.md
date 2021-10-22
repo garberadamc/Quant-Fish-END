@@ -1,5 +1,7 @@
 # Learn to use R to automate Mplus analyses 
 
+** The repository with ALL Mplus files included **
+
 # --------------------------------------------------------------------------------------
 
 ## A Quant Fish Course:
